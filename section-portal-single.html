@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Home · BSIT 1-3 Portal</title>
+  <meta name="description" content="Class schedule, links, and resources for BSIT 1-3, Cavite State University.">
+  <meta name="theme-color" content="#f4f6f1">
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxZDZhM2EiLz48cGF0aCBkPSJNMTQgMjJoMzZNMTQgMzJoMzZNMTQgNDJoMjIiIHN0cm9rZT0iI2UyYjQzYyIgc3Ryb2tlLXdpZHRoPSI2IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4K" type="image/svg+xml">
+  <script>
+    try {
+      var t = localStorage.getItem("theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  </script>
+  <style>
+/* ===== Tokens ===== */
+:root {
+  color-scheme: light;
+  --bg: #f4f6f1;
+  --surface: #ffffff;
+  --surface-2: #eceff0;
+  --glass: rgba(255, 255, 255, 0.94);
+  --ink: #121c16;
+  --muted: #55645a;
+  --accent: #1d6a3a;
+  --accent-soft: rgba(29, 106, 58, 0.12);
+  --on-accent: #ffffff;
+  --gold: #c99a1c;
+  --line: #dce2d6;
+  --shadow: 0 1px 2px rgba(16, 32, 22, 0.06), 0 4px 16px rgba(16, 32, 22, 0.05);
+
+  --radius: 14px;
+  --radius-sm: 10px;
+  --nav-h: 3.75rem;
+  --t: 250ms;
+
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Menlo, Consolas, monospace;
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0b130e;
+  --surface: #121e16;
+  --surface-2: #182a1f;
+  --glass: rgba(18, 30, 22, 0.94);
+  --ink: #e6eee8;
+  --muted: #97ab9d;
+  --accent: #5fbf86;
+  --accent-soft: rgba(95, 191, 134, 0.16);
+  --on-accent: #0b130e;
+  --gold: #e2b43c;
+  --line: #233629;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* ===== Theme transition (class is added by JS only while switching) ===== */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition: background-color var(--t) ease, color var(--t) ease, border-color var(--t) ease,
+    fill var(--t) ease, stroke var(--t) ease, box-shadow var(--t) ease !important;
+}
+
+/* ===== Base ===== */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px) + 1rem);
+  background: var(--bg);
+  color: var(--ink);
+  font: 1rem/1.55 var(--font);
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { letter-spacing: -0.02em; line-height: 1.2; }
+h1 { font-size: clamp(1.9rem, 8vw, 3rem); font-weight: 750; }
+h2 { font-size: 1.15rem; font-weight: 650; }
+a { color: var(--accent); }
+.muted { color: var(--muted); }
+.mono { font-family: var(--mono); font-size: 0.85rem; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+[tabindex="-1"]:focus { outline: none; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: fixed; top: 0.5rem; left: 0.5rem; z-index: 100;
+  padding: 0.6rem 1rem; border-radius: var(--radius-sm);
+  background: var(--accent); color: var(--on-accent);
+  transform: translateY(-200%);
+}
+.skip-link:focus { transform: none; }
+
+main, .top-inner, .footer {
+  width: min(100% - 2rem, 64rem);
+  margin-inline: auto;
+}
+main { padding-block: 1.25rem 1rem; }
+
+/* ===== Header ===== */
+.top {
+  position: sticky; top: 0; z-index: 20;
+  padding-top: env(safe-area-inset-top, 0px);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.top-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.5rem; }
+.brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); text-decoration: none; font: 700 1.05rem var(--font); letter-spacing: -0.01em; }
+.brand-mark {
+  width: 1.5rem; height: 1.5rem; border-radius: 7px;
+  background:
+    linear-gradient(var(--on-accent), var(--on-accent)) 5px 6px / 14px 2px no-repeat,
+    linear-gradient(var(--on-accent), var(--on-accent)) 5px 11px / 14px 2px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) 5px 16px / 8px 2px no-repeat,
+    var(--accent);
+}
+.top-nav { display: none; }
+
+.icon-btn {
+  display: grid; place-items: center;
+  width: 2.75rem; height: 2.75rem;
+  background: var(--surface); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 50%;
+  cursor: pointer;
+  transition: transform 120ms ease, border-color var(--t) ease;
+}
+.icon-btn:hover { border-color: var(--accent); }
+.icon-btn:active { transform: scale(0.92); }
+.icon-btn svg { animation: icon-pop 260ms ease-out; }
+
+svg.i { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+/* ===== Views and page transition ===== */
+.view { animation: view-in 220ms ease-out both; }
+.view[hidden] { display: none; }
+@keyframes view-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes icon-pop { from { opacity: 0; transform: scale(0.7) rotate(-30deg); } to { opacity: 1; transform: none; } }
+
+.page-title { margin-bottom: 1.25rem; }
+.block { margin-top: 1.75rem; }
+.block-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 0.75rem; }
+
+/* ===== Hero ===== */
+.hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  padding: 1.5rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0.55;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: linear-gradient(160deg, #000 0%, transparent 70%);
+  mask-image: linear-gradient(160deg, #000 0%, transparent 70%);
+}
+.eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; font: 0.8rem var(--mono); color: var(--muted); }
+.dot { position: relative; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--accent); }
+.dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--accent); animation: ping 2.4s ease-out infinite; }
+@keyframes ping { 0% { transform: scale(1); opacity: 0.6; } 80%, 100% { transform: scale(3); opacity: 0; } }
+.lead { margin-top: 0.6rem; max-width: 34rem; color: var(--muted); }
+
+/* ===== Cards (links) ===== */
+.grid { display: grid; gap: 0.75rem; grid-template-columns: 1fr; }
+.card {
+  display: flex; gap: 0.9rem; align-items: center;
+  min-height: 4.25rem; padding: 0.9rem 1rem;
+  background: var(--surface); color: var(--ink);
+  border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  transition: transform 120ms ease, border-color var(--t) ease;
+}
+a.card:hover { border-color: var(--accent); }
+a.card:active { transform: scale(0.985); }
+.card .icon { display: grid; place-items: center; flex: none; width: 2.5rem; height: 2.5rem; border-radius: var(--radius-sm); background: var(--accent-soft); color: var(--accent); }
+.card h3 { font-size: 1rem; font-weight: 650; }
+.card p { color: var(--muted); font-size: 0.9rem; }
+
+/* ===== Search ===== */
+.search { position: relative; margin-bottom: 1.25rem; }
+.search-icon { position: absolute; top: 50%; left: 0.9rem; transform: translateY(-50%); color: var(--muted); display: grid; pointer-events: none; }
+.search input {
+  width: 100%; height: 3rem; padding: 0 1rem 0 2.75rem;
+  background: var(--surface); color: var(--ink);
+  border: 1px solid var(--line); border-radius: var(--radius);
+  font: inherit; font-size: 1rem; /* 16px avoids iOS zoom on focus */
+  -webkit-appearance: none; appearance: none;
+  transition: border-color var(--t) ease, box-shadow var(--t) ease;
+}
+.search input::placeholder { color: var(--muted); opacity: 1; }
+.search input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+
+/* ===== Day navigation ===== */
+.day-nav { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.4rem; margin-bottom: 1.75rem; }
+.day-btn {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.1rem;
+  min-height: 3.25rem; padding: 0.35rem 0.1rem;
+  background: var(--surface); color: var(--ink);
+  border: 1px solid var(--line); border-radius: var(--radius-sm);
+  font: inherit; cursor: pointer;
+  transition: transform 120ms ease, background-color var(--t) ease, border-color var(--t) ease;
+}
+.day-btn:active { transform: scale(0.95); }
+.day-btn .d-name { font-weight: 650; font-size: 0.95rem; }
+.day-btn .d-count { font: 0.72rem var(--mono); color: var(--muted); }
+.day-btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.day-btn[aria-pressed="true"] .d-count { color: inherit; opacity: 0.85; }
+.day-btn.is-today .d-name::after { content: "•"; margin-left: 0.15rem; }
+.day-nav.is-searching .day-btn[aria-pressed="true"] { background: var(--surface); color: var(--ink); border-color: var(--line); }
+.day-nav.is-searching .day-btn[aria-pressed="true"] .d-count { color: var(--muted); }
+
+/* ===== Class cards ===== */
+.class-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
+.class-card {
+  position: relative; display: grid; gap: 0.35rem;
+  padding: 1rem 1rem 1rem 1.15rem;
+  background: var(--surface);
+  border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.class-card::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--line); }
+.class-card.is-now::before { background: var(--gold); }
+.cc-top { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+.cc-code { font: 700 1.4rem var(--mono); letter-spacing: -0.02em; }
+.cc-day { font: 0.78rem var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.badge { padding: 0.15rem 0.55rem; border: 1px solid var(--gold); border-radius: 999px; font: 700 0.72rem var(--mono); text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink); background: transparent; }
+.cc-meta { display: flex; align-items: center; gap: 0.5rem; color: var(--ink); font-size: 0.95rem; }
+.cc-meta svg { color: var(--muted); width: 1.05rem; height: 1.05rem; }
+.cc-room.is-none { color: var(--muted); font-style: italic; }
+.cc-time { font-family: var(--mono); font-size: 0.9rem; }
+
+.empty {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 1.1rem 1rem;
+  background: var(--surface-2); color: var(--muted);
+  border: 1px dashed var(--line); border-radius: var(--radius);
+}
+
+/* ===== Footer ===== */
+.footer { padding-block: 1.5rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--line); }
+
+/* ===== Bottom navigation (phones) ===== */
+.bottom-nav {
+  position: fixed; inset: auto 0 0 0; z-index: 30;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  height: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px));
+  padding: 0 env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid var(--line);
+}
+.bn-item {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.15rem;
+  min-width: 0; color: var(--muted); text-decoration: none;
+  font-size: 0.72rem; font-weight: 600;
+}
+.bn-icon { position: relative; display: grid; place-items: center; width: 3.25rem; height: 1.9rem; transition: transform 120ms ease, color var(--t) ease; }
+.bn-icon::before {
+  content: ""; position: absolute; inset: 0; border-radius: 999px;
+  background: var(--accent-soft);
+  opacity: 0; transform: scaleX(0.4);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.bn-icon svg { position: relative; }
+.bn-item:active .bn-icon { transform: scale(0.9); }
+.bn-item[aria-current="page"] { color: var(--accent); }
+.bn-item[aria-current="page"] .bn-icon::before { opacity: 1; transform: none; }
+
+/* ===== Tablet and up ===== */
+@media (min-width: 768px) {
+  body { padding-bottom: 0; }
+  .bottom-nav { display: none; }
+  .top-nav { display: flex; gap: 0.25rem; margin-left: auto; margin-right: 0.5rem; }
+  .top-nav a {
+    position: relative; padding: 0.5rem 0.9rem; border-radius: var(--radius-sm);
+    color: var(--muted); text-decoration: none; font-weight: 600;
+    transition: color var(--t) ease, background-color var(--t) ease;
+  }
+  .top-nav a:hover { color: var(--ink); background: var(--surface-2); }
+  .top-nav a[aria-current="page"] { color: var(--accent); background: var(--accent-soft); }
+  main { padding-block: 2rem 1.5rem; }
+  .hero { padding: 2.25rem 2rem; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .class-list { grid-template-columns: repeat(2, 1fr); }
+  .day-nav { max-width: 34rem; }
+}
+@media (min-width: 1024px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+  .card { transition: transform 150ms ease, border-color var(--t) ease; }
+  a.card:hover { transform: translateY(-2px); }
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .dot::after { display: none; }
+}
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="top">
+    <div class="top-inner">
+      <a class="brand" href="#/home" aria-label="BSIT 1-3 Portal home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>BSIT 1-3</span>
+      </a>
+      <nav class="top-nav" aria-label="Primary">
+        <a href="#/home" data-route="home">Home</a>
+        <a href="#/schedule" data-route="schedule">Schedule</a>
+        <a href="#/resources" data-route="resources">Resources</a>
+        <a href="#/members" data-route="members">Members</a>
+      </nav>
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Switch theme"></button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HOME -->
+    <section class="view" data-view="home" aria-labelledby="home-title">
+      <div class="hero">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>BSIT 1-3 · CvSU Main Campus</p>
+        <h1 id="home-title" tabindex="-1">Section Portal</h1>
+        <p class="lead">Schedule, links, and resources for our section, all in one place.</p>
+      </div>
+
+      <section class="block" aria-labelledby="today-title">
+        <div class="block-head">
+          <h2 id="today-title">Today</h2>
+          <span id="today-date" class="mono muted"></span>
+        </div>
+        <ul id="today-list" class="class-list"></ul>
+      </section>
+
+      <section class="block" aria-labelledby="quick-title">
+        <h2 id="quick-title">Quick access</h2>
+        <div id="quick-list" class="grid"></div>
+      </section>
+    </section>
+
+    <!-- SCHEDULE -->
+    <section class="view" data-view="schedule" aria-labelledby="schedule-title" hidden>
+      <h1 id="schedule-title" class="page-title" tabindex="-1">Class schedule</h1>
+
+      <div class="search">
+        <label class="sr-only" for="schedule-search">Search the schedule</label>
+        <span class="search-icon" data-icon="search" aria-hidden="true"></span>
+        <input id="schedule-search" type="search" placeholder="Search course, room, day, or time" autocomplete="off" enterkeyhint="search">
+      </div>
+
+      <div id="day-nav" class="day-nav" role="group" aria-label="Choose a day"></div>
+
+      <div class="block-head">
+        <h2 id="list-title"></h2>
+        <span id="list-meta" class="mono muted" aria-live="polite"></span>
+      </div>
+      <ul id="schedule-list" class="class-list"></ul>
+    </section>
+
+    <!-- RESOURCES -->
+    <section class="view" data-view="resources" aria-labelledby="resources-title" hidden>
+      <h1 id="resources-title" class="page-title" tabindex="-1">Resources</h1>
+      <div id="resource-list" class="grid"></div>
+    </section>
+
+    <!-- MEMBERS -->
+    <section class="view" data-view="members" aria-labelledby="members-title" hidden>
+      <h1 id="members-title" class="page-title" tabindex="-1">Members</h1>
+      <div id="member-list" class="grid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>BSIT 1-3 · Cavite State University – Main Campus</p>
+  </footer>
+
+  <nav class="bottom-nav" aria-label="Primary">
+    <a class="bn-item" href="#/home" data-route="home"><span class="bn-icon" data-icon="home" aria-hidden="true"></span><span class="bn-label">Home</span></a>
+    <a class="bn-item" href="#/schedule" data-route="schedule"><span class="bn-icon" data-icon="calendar" aria-hidden="true"></span><span class="bn-label">Schedule</span></a>
+    <a class="bn-item" href="#/resources" data-route="resources"><span class="bn-icon" data-icon="folder" aria-hidden="true"></span><span class="bn-label">Resources</span></a>
+    <a class="bn-item" href="#/members" data-route="members"><span class="bn-icon" data-icon="users" aria-hidden="true"></span><span class="bn-label">Members</span></a>
+  </nav>
+
+  <script>
+/* ==========================================================
+   BSIT 1-3 Section Portal
+   Edit the DATA section. The rest renders it.
+   ========================================================== */
+
+// ===== DATA =====
+const ROOM_NONE = "No room specified";
+
+const schedule = [
+  {
+    day: "Monday",
+    classes: [
+      { code: "DCIT 22", room: "ITC 201", start: "7:00 AM", end: "8:00 AM" },
+      { code: "CVSU 101", room: null, start: "8:00 AM", end: "9:00 AM" },
+      { code: "DCIT 22", room: "CCL 204", start: "10:00 AM", end: "1:00 PM" },
+      { code: "DCIT 21", room: "CCL 102", start: "3:00 PM", end: "5:00 PM" },
+      { code: "GNED 11", room: "LH101 CAS", start: "5:00 PM", end: "7:00 PM" },
+    ],
+  },
+  {
+    day: "Tuesday",
+    classes: [
+      { code: "FITT", room: "GYM", start: "7:00 AM", end: "9:00 AM" },
+      { code: "GNED 02", room: "LH 305b CAS", start: "11:00 AM", end: "1:00 PM" },
+    ],
+  },
+  {
+    day: "Wednesday",
+    classes: [
+      { code: "COSC 50", room: "ITC 408", start: "7:00 AM", end: "9:00 AM" },
+      { code: "DCIT 22", room: "CCL 102", start: "10:00 AM", end: "1:00 PM" },
+      { code: "GNED 05", room: "CAFENR 105", start: "3:00 PM", end: "5:00 PM" },
+      { code: "DCIT 21", room: "ITC 408", start: "5:00 PM", end: "7:00 PM" },
+    ],
+  },
+  { day: "Thursday", classes: [] },
+  { day: "Friday", classes: [] },
+];
+
+const quickLinks = [
+  { icon: "calendar", title: "Class schedule", text: "Rooms and times, per day", href: "#/schedule" },
+  { icon: "folder", title: "Resources", text: "Modules, slides, and notes", href: "#/resources" },
+  { icon: "users", title: "Members", text: "Who's in our section", href: "#/members" },
+];
+
+const resources = [
+  { icon: "book", title: "Course modules", text: "Replace with your drive link", href: "#/resources" },
+  { icon: "link", title: "Class group", text: "Replace with your group link", href: "#/resources" },
+  { icon: "folder", title: "Shared files", text: "Replace with your folder link", href: "#/resources" },
+];
+
+const members = [
+  { icon: "users", title: "Student Name", text: "President" },
+  { icon: "users", title: "Student Name", text: "Vice President" },
+  { icon: "users", title: "Student Name", text: "Secretary" },
+];
+
+const ROUTES = { home: "Home", schedule: "Schedule", resources: "Resources", members: "Members" };
+
+// ===== ICONS =====
+const icons = {
+  home: '<path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/>',
+  calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+  folder: '<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+  users: '<circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0M16 4.5a3.5 3.5 0 0 1 0 7M22 20a7 7 0 0 0-4-6.3"/>',
+  book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/>',
+  link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  moon: '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',
+  search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>',
+  pin: '<path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+};
+const svg = (name) => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${icons[name] || ""}</svg>`;
+
+document.querySelectorAll("[data-icon]").forEach((el) => {
+  el.innerHTML = svg(el.dataset.icon);
+});
+
+// ===== HELPERS =====
+const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const todayName = () => new Date().toLocaleDateString("en-US", { weekday: "long" });
+
+function toMinutes(t) {
+  const m = /(\d+):(\d+)\s*(AM|PM)/i.exec(t);
+  if (!m) return 0;
+  let h = Number(m[1]) % 12;
+  if (m[3].toUpperCase() === "PM") h += 12;
+  return h * 60 + Number(m[2]);
+}
+
+function isInSession(day, c) {
+  if (day !== todayName()) return false;
+  const d = new Date();
+  const now = d.getHours() * 60 + d.getMinutes();
+  return now >= toMinutes(c.start) && now < toMinutes(c.end);
+}
+
+const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "es"}`;
+
+// ===== CARDS (links) =====
+function renderCards(containerId, items) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = items
+    .map((i) => {
+      const tag = i.href ? "a" : "div";
+      const href = i.href ? ` href="${i.href}"` : "";
+      return `<${tag} class="card"${href}>
+        <span class="icon">${svg(i.icon)}</span>
+        <div><h3>${i.title}</h3><p>${i.text}</p></div>
+      </${tag}>`;
+    })
+    .join("");
+}
+
+// ===== CLASS CARDS =====
+function classCard(day, c, { showDay = false } = {}) {
+  const now = isInSession(day, c);
+  const room = c.room || ROOM_NONE;
+  return `<li class="class-card${now ? " is-now" : ""}">
+    <div class="cc-top">
+      <h3 class="cc-code">${c.code}</h3>
+      ${now ? '<span class="badge">In session</span>' : ""}
+      ${showDay ? `<span class="cc-day">${day}</span>` : ""}
+    </div>
+    <p class="cc-meta cc-room${c.room ? "" : " is-none"}">${svg("pin")}<span>${room}</span></p>
+    <p class="cc-meta cc-time">${svg("clock")}<span><time>${c.start}</time> – <time>${c.end}</time></span></p>
+  </li>`;
+}
+
+const emptyState = (text) => `<li class="empty">${svg("calendar")}<span>${text}</span></li>`;
+
+// ===== SEARCH =====
+const normalize = (s) => s.toLowerCase();
+const compact = (s) => normalize(s).replace(/[^a-z0-9]/g, "");
+const shortTime = (t) => t.replace(":00", "").replace(/\s/g, "");
+
+function matches(day, c, query) {
+  const text = normalize(
+    `${day} ${c.code} ${c.room || ROOM_NONE} ${c.start} ${c.end} ${shortTime(c.start)} ${shortTime(c.end)}`
+  );
+  const flat = compact(text);
+  return query
+    .split(/\s+/)
+    .filter(Boolean)
+    .every((t) => text.includes(normalize(t)) || flat.includes(compact(t)));
+}
+
+// ===== SCHEDULE VIEW =====
+const state = { day: null, query: "" };
+
+function renderDayNav() {
+  const nav = document.getElementById("day-nav");
+  const today = todayName();
+  nav.classList.toggle("is-searching", state.query.trim() !== "");
+  nav.innerHTML = schedule
+    .map((d) => {
+      const isToday = d.day === today;
+      const label = `${d.day}, ${plural(d.classes.length, "class")}${isToday ? ", today" : ""}`;
+      return `<button type="button" class="day-btn${isToday ? " is-today" : ""}" data-day="${d.day}"
+        aria-pressed="${d.day === state.day}" aria-label="${label}">
+        <span class="d-name">${d.day.slice(0, 3)}</span>
+        <span class="d-count">${d.classes.length}</span>
+      </button>`;
+    })
+    .join("");
+}
+
+function renderSchedule() {
+  const list = document.getElementById("schedule-list");
+  const title = document.getElementById("list-title");
+  const meta = document.getElementById("list-meta");
+  const query = state.query.trim();
+
+  renderDayNav();
+
+  if (query) {
+    const hits = [];
+    schedule.forEach((d) =>
+      d.classes.forEach((c) => matches(d.day, c, query) && hits.push({ day: d.day, c }))
+    );
+    title.textContent = "Search results";
+    meta.textContent = `${hits.length} ${hits.length === 1 ? "match" : "matches"}`;
+    list.innerHTML = hits.length
+      ? hits.map((h) => classCard(h.day, h.c, { showDay: true })).join("")
+      : emptyState(`No classes match “${query}”.`);
+    return;
+  }
+
+  const entry = schedule.find((d) => d.day === state.day);
+  title.textContent = entry.day + (entry.day === todayName() ? " · Today" : "");
+  meta.textContent = plural(entry.classes.length, "class");
+  list.innerHTML = entry.classes.length
+    ? entry.classes.map((c) => classCard(entry.day, c)).join("")
+    : emptyState(`No classes scheduled for ${entry.day}.`);
+}
+
+function initSchedule() {
+  const today = todayName();
+  state.day = (schedule.find((d) => d.day === today) || schedule[0]).day;
+
+  document.getElementById("day-nav").addEventListener("click", (e) => {
+    const btn = e.target.closest(".day-btn");
+    if (!btn) return;
+    state.day = btn.dataset.day;
+    state.query = "";
+    document.getElementById("schedule-search").value = "";
+    renderSchedule();
+  });
+
+  document.getElementById("schedule-search").addEventListener("input", (e) => {
+    state.query = e.target.value;
+    renderSchedule();
+  });
+
+  renderSchedule();
+}
+
+// ===== TODAY (home) =====
+function renderToday() {
+  const now = new Date();
+  const dayName = todayName();
+  document.getElementById("today-date").textContent = now.toLocaleDateString("en-US", {
+    weekday: "short", month: "short", day: "numeric",
+  });
+  const entry = schedule.find((d) => d.day === dayName);
+  document.getElementById("today-list").innerHTML =
+    entry && entry.classes.length
+      ? entry.classes.map((c) => classCard(entry.day, c)).join("")
+      : emptyState("No classes scheduled today.");
+}
+
+// ===== ROUTER (hash-based, keeps back/forward and refresh working) =====
+const views = document.querySelectorAll(".view");
+let firstRoute = true;
+
+function route() {
+  const name = location.hash.replace(/^#\/?/, "") || "home";
+  const key = ROUTES[name] ? name : "home";
+
+  views.forEach((v) => { v.hidden = v.dataset.view !== key; });
+  document.querySelectorAll("[data-route]").forEach((a) => {
+    if (a.dataset.route === key) a.setAttribute("aria-current", "page");
+    else a.removeAttribute("aria-current");
+  });
+  document.title = `${ROUTES[key]} · BSIT 1-3 Portal`;
+
+  if (!firstRoute) {
+    window.scrollTo(0, 0);
+    const heading = document.querySelector(`.view[data-view="${key}"] h1`);
+    if (heading) heading.focus({ preventScroll: true });
+  }
+  firstRoute = false;
+}
+
+// ===== THEME =====
+function initTheme() {
+  const root = document.documentElement;
+  const btn = document.getElementById("theme-toggle");
+  const meta = document.querySelector('meta[name="theme-color"]');
+  const mq = window.matchMedia("(prefers-color-scheme: dark)");
+  const saved = () => { try { return localStorage.getItem("theme"); } catch (e) { return null; } };
+
+  const apply = (theme) => {
+    root.setAttribute("data-theme", theme);
+    btn.innerHTML = svg(theme === "dark" ? "sun" : "moon");
+    btn.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
+    if (meta) meta.setAttribute("content", theme === "dark" ? "#0b130e" : "#f4f6f1");
+  };
+
+  apply(root.getAttribute("data-theme") || saved() || (mq.matches ? "dark" : "light"));
+
+  btn.addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    if (!reducedMotion()) {
+      root.classList.add("theme-transition");
+      setTimeout(() => root.classList.remove("theme-transition"), 400);
+    }
+    apply(next);
+    try { localStorage.setItem("theme", next); } catch (e) {}
+  });
+
+  mq.addEventListener("change", (e) => { if (!saved()) apply(e.matches ? "dark" : "light"); });
+}
+
+// ===== INIT =====
+renderCards("quick-list", quickLinks);
+renderCards("resource-list", resources);
+renderCards("member-list", members);
+initSchedule();
+renderToday();
+initTheme();
+window.addEventListener("hashchange", route);
+route();
+
+// Keep the "In session" badge current while the page stays open.
+setInterval(() => { renderToday(); renderSchedule(); }, 60000);
+</script>
+</body>
+</html>
